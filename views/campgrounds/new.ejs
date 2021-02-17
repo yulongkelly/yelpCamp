@@ -1,0 +1,69 @@
+<% layout("layouts/boilerplate") %>
+<div class="row">
+  <div class="col-6 offset-3">
+    <form action="/campgrounds" method="POST" novalidate class="validated-form">
+      <div class="mb-3">
+        <label class="form-label" for="title">Title: </label>
+        <input
+          class="form-control"
+          type="text"
+          id="title"
+          name="campground[title]"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="img">Image: </label>
+        <input
+          class="form-control"
+          type="text"
+          id="img"
+          name="campground[image]"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Location: </label>
+        <input
+          class="form-control"
+          type="text"
+          id="location"
+          name="campground[location]"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="price">Price/night: </label>
+        <div class="input-group">
+          <sapn class="input-group-text" id="price-label">$</sapn>
+          <input
+            class="form-control"
+            type="text"
+            id="price"
+            placeholder="0.00"
+            name="campground[price]"
+            aria-describedby="price-label"
+            required
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="description">Description: </label>
+        <textarea
+          class="form-control"
+          type="text"
+          id="description"
+          name="campground[description]"
+          required
+        ></textarea>
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <button class="btn btn-success">Add</button>
+    </form>
+  </div>
+</div>
