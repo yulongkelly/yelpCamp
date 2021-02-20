@@ -15,12 +15,13 @@ const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
+const MongoDBStore = require("connect-mongo")(session);
 
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
 
-const dbUrl = process.env.DB_URL;
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
 
 mongoose
   .connect(dbUrl, {
@@ -88,9 +89,21 @@ app.use(
   })
 );
 
+const secret = process.env.SECRET || "needabettersecret";
+
+const store = new MongoDBStore({
+  url: dbUrl,
+  secret,
+  touchAfter: 24 * 60 * 60,
+});
+
+store.on("error", (e) => {
+  console.log("session error", e);
+});
+
 const sessionConfig = {
   name: "session",
-  secret: "needabettersecret",
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
