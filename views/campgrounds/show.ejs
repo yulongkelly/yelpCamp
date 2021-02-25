@@ -115,15 +115,15 @@
       </div>
       <button class="btn btn-success">Submit</button>
     </form>
-    <% for(let review of campground.reviews) {%>
-    <div class="card mb-3">
+    <%}%> <% for(let review of campground.reviews) {%>
+    <div class="card mt-3 mb-3">
       <div class="card-body">
         <div class="card-title"><%=review.author.username%></div>
         <p class="starability-result" data-rating="<%=review.rating%>">
           Rated: <%=review.rating%> stars
         </p>
         <div class="card-text">Review: <%=review.body%></div>
-        <% if(review.author.equals(currentUser._id)) {%>
+        <% if(currentUser && review.author.equals(currentUser._id)) {%>
         <form
           action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE"
           method="POST"
@@ -135,7 +135,6 @@
     </div>
     <%}%>
   </div>
-  <%}%>
 </div>
 
 <script>
